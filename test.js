@@ -1,8 +1,6 @@
 
 const test = require('tape')
 
-const deepEqual = require('deep-equal')
-
 const match = require('./')
 
 const instance = struct => type => type instanceof struct
@@ -30,13 +28,8 @@ test('Type match', t => {
     }],
     [instance(Foo), v => {
       t.pass('Matches using a function')
-    }],
-    [v => deepEqual(v, {
-      foo: 'bar'
-    }), v => console.log('hello deep equal object')]
+    }]
   ])
-
-  matcher({foo: 'bar'})
 
   matcher('FOO')
   matcher(e.BAR)
@@ -67,4 +60,14 @@ test('Catch all match', t => {
 
   matcher('foo')
   matcher('bar')
+})
+
+test('Match can return plain values', t => {
+  t.plan(1)
+
+  const matcher = match([
+    ['foo', 'bar']
+  ])
+
+  t.equal(matcher('foo'), 'bar', 'Match can assign plain values')
 })
