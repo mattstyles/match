@@ -1,6 +1,8 @@
 
 const test = require('tape')
 
+const deepEqual = require('deep-equal')
+
 const match = require('./')
 
 const instance = struct => type => type instanceof struct
@@ -15,21 +17,26 @@ test('Type match', t => {
   }
   const matcher = match([
     ['FOO', value => {
-      t.ok('Matches against a string')
+      t.pass('Matches against a string')
     }],
     [e.BAR, value => {
-      t.ok('Matches against object members')
+      t.pass('Matches against object members')
     }],
     [1, value => {
-      t.ok('Matches against an integer')
+      t.pass('Matches against an integer')
     }],
     [v => v > 10 && v < 100, v => {
-      t.ok('Matches using a predicate function')
+      t.pass('Matches using a predicate function')
     }],
     [instance(Foo), v => {
-      t.ok('Matches using a function')
-    }]
+      t.pass('Matches using a function')
+    }],
+    [v => deepEqual(v, {
+      foo: 'bar'
+    }), v => console.log('hello deep equal object')]
   ])
+
+  matcher({foo: 'bar'})
 
   matcher('FOO')
   matcher(e.BAR)
@@ -45,9 +52,7 @@ test('Match return', t => {
     [2, v => v * 2]
   ])
 
-  const result = matcher(2)
-
-  t.equal(result, 4, 'Match can be used as an assignment')
+  t.equal(matcher(2), 4, 'Match can be used as an assignment')
 })
 
 test('Catch all match', t => {
@@ -56,7 +61,7 @@ test('Catch all match', t => {
   const matcher = match([
     ['foo', () => {}],
     [v => {
-      t.ok('Catch all successful')
+      t.pass('Catch all successful')
     }]
   ])
 
