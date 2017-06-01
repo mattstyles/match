@@ -45,7 +45,21 @@ test('Match return', t => {
     [2, v => v * 2]
   ])
 
-  const result = match(2)
+  const result = matcher(2)
 
   t.equal(result, 4, 'Match can be used as an assignment')
+})
+
+test('Catch all match', t => {
+  t.plan(1)
+
+  const matcher = match([
+    ['foo', () => {}],
+    [v => {
+      t.ok('Catch all successful')
+    }]
+  ])
+
+  matcher('foo')
+  matcher('bar')
 })
