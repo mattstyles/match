@@ -1,6 +1,6 @@
 {
   "name": "@mattstyles/match",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pattern matching algorithm",
   "main": "lib.js",
   "files": [
