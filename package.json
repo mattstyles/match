@@ -2,14 +2,25 @@
   "name": "@mattstyles/match",
   "version": "1.0.0",
   "description": "Pattern matching algorithm",
-  "main": "index.js",
+  "main": "lib.js",
+  "files": [
+    "lib.js"
+  ],
   "scripts": {
+    "build": "babel index.js > lib.js",
     "test": "tape test.js"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   },
   "repository": "github.com:mattstyles/match.git",
   "author": "Matt Styles",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
     "standard": "^10.0.2",
     "tape": "^4.6.3"
   }

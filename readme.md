@@ -96,7 +96,7 @@ matcher(new Foo())
 
 ## Exhaustive matching
 
-JS can’t do work out if you’ve supplied enough conditions to be exhaustive but `match` will accept a lone function to use as a catch-all:
+JS can’t work out if you’ve supplied enough conditions to be exhaustive but `match` will accept a lone function to use as a catch-all:
 
 ```js
 const matcher = match([
